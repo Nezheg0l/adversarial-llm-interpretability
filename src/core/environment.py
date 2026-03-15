@@ -23,7 +23,6 @@ def ping():
     if not ip:
         return "Error: No IP provided"
     
-    # === VULNERABILITY: OS COMMAND INJECTION ===
     cmd = f"ping -c 1 {ip}"
     
     try:
@@ -60,13 +59,10 @@ if __name__ == '__main__':
         params = {"ip": payload} if attack_type == "RCE" else {"username": payload, "password": "123"}
         
         try:
-            # Збільшуємо тайм-аут до 10 секунд, бо ping може тупити
             r = requests.get(target, params=params, timeout=10)
             
-            # === DEBUG LOGGING (Те, чого нам не вистачало) ===
             print(f"    🔎 DEBUG HTTP Code: {r.status_code}")
             print(f"    🔎 DEBUG Response: {r.text.strip()[:150]}...") # Перші 150 символів
-            # ================================================
 
             if attack_type == "RCE" and ("root" in r.text or "uid=" in r.text):
                 return True
@@ -79,7 +75,6 @@ if __name__ == '__main__':
             
         return False
     def apply_patch(self, new_code):
-        # Backup first
         shutil.copy(Config.VICTIM_FILE, Config.BACKUP_FILE)
         with open(Config.VICTIM_FILE, "w") as f:
             f.write(new_code)

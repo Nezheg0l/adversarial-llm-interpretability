@@ -1,3 +1,9 @@
+![Research](https://img.shields.io/badge/Research-grey)
+![Completed](https://img.shields.io/badge/Completed-brightgreen)
+![Red Team](https://img.shields.io/badge/Red_Team-grey)
+![Target](https://img.shields.io/badge/Llama_3.1_8B-red)
+![Blue Team](https://img.shields.io/badge/Blue_Team-grey)
+![Attacker](https://img.shields.io/badge/DeepSeek_R1_14B-blue)
 
 # Adversarial AI Research: Semantic Drift & Alignment Degradation
 

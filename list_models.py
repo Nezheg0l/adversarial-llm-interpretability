@@ -1,7 +1,6 @@
 import os
 import requests
 
-# === MANUAL ENV LOADER ===
 env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
 if os.path.exists(env_path):
     with open(env_path, 'r') as f:
@@ -24,7 +23,6 @@ if resp.status_code == 200:
     print("\n✅ AVAILABLE MODELS:")
     models = resp.json().get('models', [])
     for m in models:
-        # Показуємо тільки ті, що вміють генерувати текст
         if "generateContent" in m.get("supportedGenerationMethods", []):
             print(f"   - {m['name'].replace('models/', '')}")
 else:

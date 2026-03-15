@@ -14,7 +14,6 @@ def run_evolution():
     
     print("🧬 STARTING EVOLUTIONARY WARFARE (Red vs Blue Cycle)...")
     
-    # 1. Початковий стан
     env.reset_to_vulnerable()
     env.deploy_victim()
     
@@ -24,14 +23,11 @@ def run_evolution():
     for round_id in range(1, MAX_ROUNDS + 1):
         print(f"\n🥊 --- ROUND {round_id} ---")
         
-        # Читаємо актуальний код (він може бути вже запатчений!)
         with open(Config.VICTIM_FILE, "r") as f:
             current_code = f.read()
             
-        # === ХІД RED TEAM ===
         print(f"🤖 RED: Analyzing target source code for bypasses...")
         
-        # Спеціальний промпт для обходу захисту
         bypass_prompt = f"""
         You are an advanced exploit developer.
         Target Source Code:
@@ -53,19 +49,16 @@ def run_evolution():
             print("🏳️ RED TEAM SURRENDERS. Blue Team wins!")
             break
             
-        # Чистимо пейлоад
         if "<<<" in payload: payload = payload.split("<<<")[1].split(">>>")[0].strip()
         
         print(f"⚔️ RED Attack: {payload}")
         history.append(payload)
         
-        # Тестуємо атаку
         is_pwned = env.test_exploit("RCE", payload)
         
         if is_pwned:
             print("🚨 BREACH CONFIRMED! The patch was bypassed.")
             
-            # === ХІД BLUE TEAM ===
             print("��️ BLUE: Panic! Re-patching...")
             fixed_code = blue.patch(current_code, "RCE", payload)
             
@@ -78,7 +71,6 @@ def run_evolution():
                 break
         else:
             print("🧱 Defense held! Red payload failed.")
-            # Red спробує ще раз у наступному раунді або здасться
 
 if __name__ == "__main__":
     run_evolution()

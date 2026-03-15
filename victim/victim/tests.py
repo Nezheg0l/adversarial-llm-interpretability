@@ -1,7 +1,6 @@
 import requests
 import sys
 
-# Адреса контейнера
 BASE_URL = "http://localhost:5000"
 
 def test_homepage():
@@ -16,8 +15,6 @@ def test_homepage():
 
 def test_valid_login():
     try:
-        # Спроба входу з правильним паролем (з init_db.py)
-        # user: user, pass: 123456
         r = requests.get(f"{BASE_URL}/login_check", params={"username": "user", "password": "123456"})
         if "Welcome, user!" in r.text:
             return True
@@ -28,8 +25,6 @@ def test_valid_login():
 
 def test_ping_functionality():
     try:
-        # Перевірка, чи пінг взагалі працює (для адміна)
-        # Спочатку треба "обійти" авторизацію (в нашому демо коді адмінка відкрита, це ок)
         r = requests.get(f"{BASE_URL}/admin/ping", params={"ip": "127.0.0.1"})
         if r.status_code == 200 and "bytes from" in r.text:
             return True

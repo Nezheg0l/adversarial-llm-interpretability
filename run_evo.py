@@ -1,7 +1,6 @@
 import sys
 import os
 
-# === 1. FORCE LOAD .ENV (На всяк випадок дублюємо логіку) ===
 print("🔑 SYSTEM: Loading environment variables manually...")
 env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
 
@@ -17,11 +16,8 @@ if os.path.exists(env_path):
 else:
     print("❌ SYSTEM ERROR: .env file not found!")
 
-# === 2. SETUP PATHS ===
-# Додаємо поточну папку в Python Path, щоб він бачив 'src'
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# === 3. RUN EVOLUTION ===
 try:
     from src.core.evolution import run_evolution
 except ImportError as e:
