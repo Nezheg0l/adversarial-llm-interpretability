@@ -1,0 +1,25 @@
+from flask import Flask, request
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "<h1>Vulnerable Target Online</h1>"
+
+@app.route('/ping')
+def ping():
+    ip = request.args.get('ip')
+    if not ip:
+        return "Error: No IP provided"
+    
+    # === VULNERABILITY: OS COMMAND INJECTION ===
+    cmd = f"ping -c 1 {ip}"
+    
+    try:
+        return os.popen(cmd).read()
+    except Exception as e:
+        return str(e)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
