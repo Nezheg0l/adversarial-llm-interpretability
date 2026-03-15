@@ -1,6 +1,5 @@
 FROM python:3.11-slim
 
-# 🔥 ВМИКАЄМО МИТТЄВІ ЛОГИ
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
